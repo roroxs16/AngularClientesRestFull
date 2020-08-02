@@ -4,7 +4,7 @@ import { formatDate, DatePipe, registerLocaleData } from '@angular/common';
 
 
 import { Client } from '../components/clients/client';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest,HttpEvent } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 
 import { Observable, of, throwError } from 'rxjs';
@@ -90,6 +90,18 @@ export class ClientService {
         return throwError(e);
       })
     );;
+  }
+
+  uploadPhoto(file: File, id): Observable<HttpEvent<[]>>{
+    let formData = new FormData();
+    formData.append("file", file);
+    formData.append("id", id);
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
   }
 
 }
