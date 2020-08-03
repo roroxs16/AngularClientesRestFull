@@ -1,59 +1,55 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { registerLocaleData } from '@angular/common';
-
-import localeES from '@angular/common/locales/es';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DirectivaComponent } from './components/directiva/directiva.component';
-import { ClientsComponent } from './components/clients/clients.component';
-import { FormComponent } from './components/clients/form.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { FormComponent } from './components/clientes/form.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
-
+import { ClienteService } from './components/clientes/cliente.service';
 import { RouterModule, Routes } from '@angular/router';
-
-import { FormsModule } from "@angular/forms";
-//services
-import { ClientService } from './services/client.service';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDatepickerModule } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DetalleComponent } from './components/detalle/detalle.component';
+import { DetalleComponent } from './components/clientes/detalle/detalle.component';
 
-registerLocaleData(localeES, 'es')
-
+registerLocaleData(localeES, 'es');
 
 const routes: Routes = [
-  { path: '', redirectTo: '/clients', pathMatch: 'full' },
+  { path: '', redirectTo: '/clientes', pathMatch: 'full' },
   { path: 'directivas', component: DirectivaComponent },
-  { path: 'clients', component: ClientsComponent },
-  { path: 'clients/page/:page', component: ClientsComponent },
-  { path: 'clients/form', component: FormComponent },
-  { path: 'clients/form/:id', component: FormComponent },
-  
-]
+  { path: 'clientes', component: ClientesComponent },
+  { path: 'clientes/page/:page', component: ClientesComponent },
+  { path: 'clientes/form', component: FormComponent },
+  { path: 'clientes/form/:id', component: FormComponent }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    HeaderComponent,
     FooterComponent,
     DirectivaComponent,
-    ClientsComponent,
+    ClientesComponent,
     FormComponent,
     PaginatorComponent,
     DetalleComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDatepickerModule, MatMomentDateModule
+    BrowserAnimationsModule, MatDatepickerModule, MatMomentDateModule
   ],
-  providers: [ClientService],
+  providers: [ClienteService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
-.open-modal{
+.abrir-modal{
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
-  top:0px;
-  left: 0px;
+  top: 0px;
+  left:0px;
   width: 100%;
   height: 100%;
   z-index: 1000;
@@ -20,5 +20,5 @@
   -webkit-animation-name: fadeIn;
 }
 
-@keyframes fadeIn {0%{opacity:0}to{opacity: 1}}
-@-webkit-keyframes fadeIn {0%{opacity:0}to{opacity: 1}}
+@keyframes fadeIn {0% {opacity:0}to{opacity: 1}}
+@-webkit-keyframes fadeIn {0% {opacity:0}to{opacity: 1}}
